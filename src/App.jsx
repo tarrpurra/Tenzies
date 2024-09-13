@@ -1,5 +1,7 @@
 import "./App.css";
 import Tenzin from "./components/Tenzin";
+import { useWindowSize } from "@react-hook/window-size";
+import Confetti from 'react-confetti'
 import { useState, useEffect } from "react";
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(120); // Start with 2 minutes
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const {width,height}=useWindowSize()
 
   function toggleLock(index) {
     setLockedDice((prevLocks) =>
@@ -111,8 +114,11 @@ function App() {
         <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
           {Winner ? (
             <>
+
+              <Confetti width={width} height={height}/>
               <h1 className="text-green-600 font-bold text-5xl mb-4">You Win!</h1>
               <h2 className="text-white text-2xl">Want to play again?</h2>
+              
             </>
           ) : (
             <>
